@@ -1,0 +1,40 @@
+<template>
+  <form @submit.prevent="onSabmit">
+    <input type="text" v-model="title">
+    <button type="submit">Добавить задачу!</button>
+  </form>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      title: ''
+    }
+  },
+  methods: {
+    onSabmit() {
+
+      if (this.title.trim()) {
+        const newTodo = {
+          id: Date.now(),
+          title: this.title,
+          completed: false
+        }
+        this.$emit('add-todo', newTodo)
+        this.title =''
+
+      }
+    }
+  }
+}
+
+</script>
+<style>
+form {
+  display: inline-flex;
+}
+
+input {
+  height: 20px;
+}
+</style>
